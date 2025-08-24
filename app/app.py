@@ -5,7 +5,7 @@ import requests
 app = Flask(__name__)
 
 # Get the domain from an environment variable
-DOMAIN = os.environ.get("DOMAIN", "auth.vugt.me")  # TODO: idp.example.com
+DOMAIN = os.environ.get("DOMAIN", "idp.example.com")
 APPLICATION = os.environ.get("APPLICATION", "tailscale")
 issuer_url = f"https://{DOMAIN}/application/o/{APPLICATION}/"
 
