@@ -47,6 +47,15 @@ export APPLICATION=tailscaleapp
 
 By default, we use `tailscale` as the application name.
 
+3. **(Optional) Configure Caching and Timeout:**
+
+  Additional environment variables for performance tuning:
+
+  ```bash
+export CACHE_TTL=300        # Cache IDP endpoints for 5 minutes (default)
+export REQUEST_TIMEOUT=10   # HTTP request timeout in seconds (default)
+```
+
 2. **Build the Docker Image:**
 
   Run the following command from the project root:
