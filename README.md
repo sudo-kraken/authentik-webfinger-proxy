@@ -5,6 +5,7 @@ This is a minimal Flask application that implements a WebFinger endpoint for Tai
 ## Features
 
 - **Dynamic Issuer URL:** Uses the `DOMAIN` environment variable to build the issuer URL.
+- **Dynamic Application:** Uses the `APPLICATION` environment variable to specify the application name in Authentik.
 - **WebFinger Endpoint:** Responds to WebFinger queries for resources starting with `acct:`.
 - **WSGI Compatible:** Runs with Gunicorn for production-ready deployments.
 - **Containerised:** Easily deployable with Docker.
@@ -28,12 +29,31 @@ authentik-webfinger-proxy/
 
 ### Using Docker
 
-1. **Set the Environment Variable:**
+1. **Set DOMAIN Environment Variable:**
 
   The application uses the `DOMAIN` environment variable to configure the issuer URL. For example, if you want your issuer URL to be `https://auth.example-domain.com/application/o/tailscale/`, set:
 
   ```bash
 export DOMAIN=auth.example-domain.com
+```
+
+1. **(Optional) Set APPLICATION Environment Variable:**
+
+  The application uses the `APPLICATION` environment variable to configure the application (slug) from Authentik. For example, if you want your application to be `tailscaleapp`, set:
+
+  ```bash
+export APPLICATION=tailscaleapp
+```
+
+By default, we use `tailscale` as the application name.
+
+3. **(Optional) Configure Caching and Timeout:**
+
+  Additional environment variables for performance tuning:
+
+  ```bash
+export CACHE_TTL=300        # Cache IDP endpoints for 5 minutes (default)
+export REQUEST_TIMEOUT=10   # HTTP request timeout in seconds (default)
 ```
 
 2. **Build the Docker Image:**
