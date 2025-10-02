@@ -1,0 +1,47 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Automated dependency updates for authentik-webfinger-proxy",
+  "extends": ["config:recommended"],
+  "timezone": "UTC",
+  "schedule": ["every weekend"],
+  "prHourlyLimit": 2,
+  "prConcurrentLimit": 5,
+  "baseBranchPatterns": ["main"],
+  "rebaseWhen": "conflicted",
+  "labels": ["dependencies"],
+  "automergeStrategy": "merge-commit",
+  "dependencyDashboard": true,
+  "separateMinorPatch": true,
+  "packageRules": [
+    {
+      "description": "Automerge minor and patch updates for Python packages",
+      "matchManagers": ["pip_requirements"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "description": "Automerge minor and patch updates for GitHub Actions with digest pinning",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "pinDigests": true
+    },
+    {
+      "description": "Automerge patch updates for Docker base images with digest pinning",
+      "matchManagers": ["dockerfile"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "pinDigests": true
+    },
+    {
+      "description": "Group all Python package updates together",
+      "matchManagers": ["pip_requirements"],
+      "groupName": "Python dependencies"
+    },
+    {
+      "description": "Group all GitHub Actions updates together",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions"
+    }
+  ]
+}
