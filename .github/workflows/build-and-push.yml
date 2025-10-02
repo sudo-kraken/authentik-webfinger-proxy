@@ -36,7 +36,7 @@ jobs:
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Commit timestamp
         id: ts
@@ -68,7 +68,7 @@ jobs:
         packages: write
       steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Commit timestamp
         id: ts
