@@ -1,4 +1,4 @@
 Flask==3.1.2
 gunicorn==23.0.0
 requests==2.32.5
-urllib3==2.2.3
+urllib3==2.5.0
