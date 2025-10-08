@@ -9,7 +9,6 @@ body = """
 {%- endmacro -%}
 
 {%- set excluded_users = ["github-actions[bot]", "dependabot[bot]", "renovate[bot]"] -%}
-{%- set first_time_contributors = github.contributors | filter(attribute="is_first_time", value=true) -%}
 
 {% macro print_commit(commit) -%}
     - {% if commit.scope %}*({{ commit.scope }})* {% endif %}\
@@ -41,20 +40,16 @@ body = """
     {%- endfor -%}
 {%- endfor -%}
 
-{# New contributors - deduped, header once, skip blanks and bots #}
-{%- if github and first_time_contributors and first_time_contributors | length > 0 -%}
-  {%- set grouped = first_time_contributors | group_by(attribute="username") -%}
-  {%- set printed_header = false -%}
-  {%- for username, entries in grouped %}
-    {%- if username and username | length > 0 and username not in excluded_users -%}
-      {%- if not printed_header -%}
+{# New contributors - properly deduped #}
+{%- if github.contributors | filter(attribute="is_first_time", value=true) %}
+    {%- set_global seen_contributors = [] %}
 ## New Contributors ❤️
-        {%- set_global printed_header = true -%}
-      {%- endif -%}
-      {%- set pr = entries[0].pr_number -%}
-* @{{ username }} made their first contribution{%- if pr %} in [#{{ pr }}]({{ self::remote_url() }}/pull/{{ pr }}){%- endif %}
-    {%- endif -%}
-  {%- endfor -%}
+    {%- for contributor in github.contributors | filter(attribute="is_first_time", value=true) %}
+        {%- if contributor.username and contributor.username not in excluded_users and contributor.username not in seen_contributors %}
+            {%- set_global seen_contributors = seen_contributors | concat(with=contributor.username) %}
+* @{{ contributor.username }} made their first contribution{%- if contributor.pr_number %} in [#{{ contributor.pr_number }}]({{ self::remote_url() }}/pull/{{ contributor.pr_number }}){%- endif %}
+        {%- endif %}
+    {%- endfor %}
 {%- endif -%}
 """
 footer = """
@@ -67,10 +62,10 @@ postprocessors = []
 conventional_commits = true
 filter_unconventional = true
 split_commits = false
-# Make noisy tags in messages nicer in the output
+filter_commits = true
 commit_preprocessors = [
-  { pattern = "\\[skip ci\\]", replace = "skip CI" },
-  { pattern = "\\[ci skip\\]", replace = "skip CI" }
+  { pattern = '.*\[skip ci\].*', replace = "" },
+  { pattern = '.*\[ci skip\].*', replace = "" },
 ]
 commit_parsers = [
   { message = "^feat", group = "<!-- 0 -->🚀 Features" },
@@ -88,9 +83,10 @@ commit_parsers = [
   { message = "^chore|^ci", group = "<!-- 7 -->⚙️ Miscellaneous Tasks" },
   { body = ".*security", group = "<!-- 8 -->🛡️ Security" },
   { message = "^revert", group = "<!-- 9 -->◀️ Revert" },
+  { message = '.*\[skip ci\].*', skip = true },
+  { message = '.*\[ci skip\].*', skip = true },
 ]
 protect_breaking_commits = false
-filter_commits = false
 tag_pattern = "v?[0-9].[0-9].[0-9]*"
 skip_tags = "beta|alpha"
 ignore_tags = "rc"
