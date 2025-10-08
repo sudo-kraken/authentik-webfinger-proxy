@@ -3,19 +3,8 @@ name: Build and Push Multi-Architecture Image
 
 on:
   push:
-    branches:
-      - main
     tags:
       - 'v*'
-    paths-ignore:
-      - '.github/renovate.json'
-      - '.github/workflows/renovate.yml'
-      - 'README.md'
-      - '*.md'
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
 
 permissions:
   contents: read
