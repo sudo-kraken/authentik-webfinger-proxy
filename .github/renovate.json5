@@ -11,16 +11,33 @@
     ":disableRateLimiting",
     ":dependencyDashboard",
     ":semanticCommits",
-    ":timezone(Europe/Paris)",
+    ":timezone(Europe/London)",
     "github>sudo-kraken/authentik-webfinger-proxy//.github/renovate/labels.json5",
     "github>sudo-kraken/authentik-webfinger-proxy//.github/renovate/docker.json5",
     "github>sudo-kraken/authentik-webfinger-proxy//.github/renovate/python.json5",
     "github>sudo-kraken/authentik-webfinger-proxy//.github/renovate/devcontainers.json5",
-    "github>sudo-kraken/authentik-webfinger-proxy//.github/renovate/semantic_commits.json5",    
+    "github>sudo-kraken/authentik-webfinger-proxy//.github/renovate/semantic_commits.json5",
   ],
   dependencyDashboardTitle: "Renovate Dashboard 🤖",
   suppressNotifications: ["prEditedNotification", "prIgnoreNotification"],
   rebaseWhen: "conflicted",
+  prConcurrentLimit: 5,
   labels: ["dependencies"],
   minimumReleaseAge: "7 days",
+
+packageRules: [
+    {
+      description: "Fast track security advisories",
+      isVulnerabilityAlert: true,
+      force: {
+        minimumReleaseAge: null,
+        prCreation: "immediate"
+      }
+    },
+    {
+      description: "Do not delay GitHub Actions updates",
+      matchManagers: ["github-actions"],
+      minimumReleaseAge: null
+    }
+  ]  
 }
