@@ -1,10 +1,11 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: Update uv.lock on Renovate PRs
+name: Check uv.lock Freshness
 
 on:
   pull_request:
-    branches:
-      - main
+    paths:
+      - "pyproject.toml"
+      - "uv.lock"
 
 permissions:
   contents: write
