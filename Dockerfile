@@ -21,4 +21,4 @@ COPY app ./app
 EXPOSE 8000
 
 # Define the command to run the application using Gunicorn via uv
-CMD ["uv", "run", "--no-dev", "gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "app:app"]
+CMD ["uv", "run", "--no-dev", "gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "app.app:app"]
