@@ -12,6 +12,10 @@ on:
 
 permissions: {}
 
+concurrency:
+  group: validate-pr-title-${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   lint-pr:
     name: Validate PR title

@@ -16,6 +16,7 @@
     "github>sudo-kraken/authentik-webfinger-proxy//.github/renovate/docker.json5",
     "github>sudo-kraken/authentik-webfinger-proxy//.github/renovate/python.json5",
     "github>sudo-kraken/authentik-webfinger-proxy//.github/renovate/devcontainers.json5",
+    "github>sudo-kraken/authentik-webfinger-proxy//.github/renovate/semantic_commits.json5",    
   ],
   dependencyDashboardTitle: "Renovate Dashboard 🤖",
   suppressNotifications: ["prEditedNotification", "prIgnoreNotification"],
