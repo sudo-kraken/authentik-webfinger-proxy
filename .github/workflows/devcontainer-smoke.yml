@@ -9,6 +9,7 @@ concurrency:
 
 jobs:
   smoke:
+    name: Smoke Test Dev Container
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -43,8 +44,13 @@ jobs:
 
               echo "Docker socket check"
               if [ -S /var/run/docker.sock ]; then
-                docker version >/dev/null
-                docker ps >/dev/null
+                if sudo -n true 2>/dev/null; then
+                  sudo -n docker version >/dev/null 2>&1 || docker version >/dev/null
+                  sudo -n docker ps >/dev/null 2>&1 || docker ps >/dev/null
+                else
+                  docker version >/dev/null
+                  docker ps >/dev/null
+                fi
                 echo "Docker socket available and working"
               else
                 echo "No /var/run/docker.sock available in container, skipping daemon tests"
