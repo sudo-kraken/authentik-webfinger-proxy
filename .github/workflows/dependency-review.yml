@@ -1,9 +1,12 @@
 ---
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: Dependency Review
+
 on:
   pull_request:
+
 permissions: {}
+
 jobs:
   dependency-review:
     runs-on: ubuntu-24.04

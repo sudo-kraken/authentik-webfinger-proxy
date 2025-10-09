@@ -1,6 +1,7 @@
 ---
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: CodeQL
+
 on:
   schedule:
     - cron: '0 7 * * *'
@@ -10,7 +11,9 @@ on:
   pull_request:
     branches:
       - main
+
 permissions: {}
+
 jobs:
   analyze:
     name: Analyse (${{ matrix.language }})

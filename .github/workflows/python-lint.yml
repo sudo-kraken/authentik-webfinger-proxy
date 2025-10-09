@@ -1,9 +1,12 @@
 ---
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: Python Lint
+
 on:
   - pull_request
+
 permissions: {}
+
 jobs:
   lint:
     name: Lint

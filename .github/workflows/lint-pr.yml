@@ -1,6 +1,7 @@
 ---
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: Validate PR title
+
 on:
   pull_request:
     types:
@@ -8,7 +9,9 @@ on:
       - edited
       - synchronize
       - reopened
+
 permissions: {}
+
 jobs:
   lint-pr:
     name: Validate PR title
