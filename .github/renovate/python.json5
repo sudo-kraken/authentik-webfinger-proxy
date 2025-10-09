@@ -1,0 +1,15 @@
+{
+  packageRules: [
+    {
+      description: "Group all Python package updates together",
+      matchManagers: ["pep621"],
+      groupName: "Python dependencies",
+    },
+    {
+      description: "Automerge minor and patch updates for Python packages",
+      matchManagers: ["pep621"],
+      matchUpdateTypes: ["minor", "patch"],
+      automerge: true,
+    },
+  ],
+}
