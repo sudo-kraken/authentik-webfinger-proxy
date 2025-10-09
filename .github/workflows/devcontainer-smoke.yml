@@ -1,0 +1,54 @@
+name: Devcontainer Smoke Test
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: devcontainer-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Build devcontainer
+        uses: devcontainers/ci@v0.3
+        with:
+          runCmd: echo "container up"
+
+      - name: Verify tools and settings inside devcontainer
+        uses: devcontainers/ci@v0.3
+        with:
+          runCmd: |
+            bash -lc '
+              set -euo pipefail
+
+              echo "User check"
+              id -un | grep -qx vscode
+
+              echo "PATH check"
+              echo "$PATH" | grep -q "/usr/local/bin"
+
+              echo "uv and Python"
+              command -v uv >/dev/null
+              uv --version
+              python --version
+              uv run -q python -V
+
+              echo "Docker client present"
+              command -v docker >/dev/null
+
+              echo "Docker socket check"
+              if [ -S /var/run/docker.sock ]; then
+                docker version >/dev/null
+                docker ps >/dev/null
+                echo "Docker socket available and working"
+              else
+                echo "No /var/run/docker.sock available in container, skipping daemon tests"
+              fi
+
+              echo "OK: devcontainer is healthy"
+            '
