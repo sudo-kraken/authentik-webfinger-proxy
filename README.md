@@ -14,16 +14,18 @@ This is a minimal Flask application that implements a WebFinger endpoint for Tai
 
 ```
 authentik-webfinger-proxy/
-├──Dockerfile
-├──app/
-  ├──requirements.txt
-  ├──app.py
+├── Dockerfile
+├── pyproject.toml
+├── uv.lock
+├── .python-version
+└── app/
+    └── app.py
 ```
 
 ## Prerequisites
 
 - [Docker](https://www.docker.com/)
-- (Alternatively) Python 3.10 for local development
+- (Alternatively) [uv](https://docs.astral.sh/uv/) and Python 3.13 for local development
 
 ## Setup and Installation
 
@@ -74,30 +76,37 @@ docker run -d -p 8000:8000 -e DOMAIN=auth.example-domain.com authentik-webfinger
 
 ## Using Local Development
 
-1. **Create a Virtual Environment:**
+1. **Install uv:**
 
-  ```bash
-python3 -m venv venv
-source venv/bin/activate
-```
+   Follow the [official installation guide](https://docs.astral.sh/uv/getting-started/installation/), or:
+
+   ```bash
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
 
 2. **Install Dependencies:**
 
-  ```bash
-pip install -r requirements.txt
-```
+   ```bash
+   uv sync
+   ```
 
 3. **Set the Environment Variable:**
 
-  ```bash
-export DOMAIN=auth.example-domain.com
-```
+   ```bash
+   export DOMAIN=auth.example-domain.com
+   ```
 
 4. **Run the Application:**
 
-  ```bash
-python app/app.py
-```
+   ```bash
+   uv run python app/app.py
+   ```
+
+   Or use Gunicorn:
+
+   ```bash
+   uv run gunicorn -w 4 -b 0.0.0.0:8000 app:app
+   ```
 
 ## Endpoint Usage
 
