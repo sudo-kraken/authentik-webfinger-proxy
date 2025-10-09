@@ -25,19 +25,17 @@
   labels: ["dependencies"],
   minimumReleaseAge: "7 days",
 
-packageRules: [
+  lockFileMaintenance: {
+    enabled: true,
+    schedule: ["after 9pm on sunday"],
+    automerge: true,
+    branchTopic: "lock-file-maintenance"
+  },  
+
+  packageRules: [
     {
-      description: "Fast track security advisories",
-      isVulnerabilityAlert: true,
-      force: {
-        minimumReleaseAge: null,
-        prCreation: "immediate"
-      }
-    },
-    {
-      description: "Do not delay GitHub Actions updates",
       matchManagers: ["github-actions"],
       minimumReleaseAge: null
     }
-  ]  
+  ]
 }

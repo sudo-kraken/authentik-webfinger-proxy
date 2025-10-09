@@ -24,20 +24,5 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@eb1897b8dc4b5d5bfe39a428a8f2304605e0983c # v7.0.0
 
-      - name: Install project Python
-        run: uv python install
-
-      - name: Refresh lock file
-        run: uv lock
-
-      - name: Commit and push uv.lock if changed
-        run: |
-          if ! git diff --quiet -- uv.lock; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add uv.lock
-            git commit -m "chore: update uv.lock for Renovate PR"
-            git push
-          else
-            echo "No changes to uv.lock"
-          fi
+      - name: Ensure lock is up to date
+        run: uv lock --check
