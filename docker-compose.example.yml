@@ -1,8 +1,9 @@
+
 version: '3.8'
 
 services:
   authentik-webfinger-proxy:
-    build: .
+    image: ghcr.io/sudo-kraken/authentik-webfinger-proxy:latest
     ports:
       - "8000:8000"
     environment:
