@@ -29,6 +29,7 @@ jobs:
       - name: Verify tools and settings inside devcontainer
         uses: devcontainers/ci@v0.3
         with:
+          push: never
           runCmd: |
             bash -lc '
               set -euo pipefail
