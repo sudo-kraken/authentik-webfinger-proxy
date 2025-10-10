@@ -23,6 +23,7 @@ jobs:
       - name: Build devcontainer
         uses: devcontainers/ci@v0.3
         with:
+          push: never
           runCmd: echo "container up"
 
       - name: Verify tools and settings inside devcontainer
