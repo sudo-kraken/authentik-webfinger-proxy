@@ -1,24 +1,26 @@
-# Use uv's official Python image
 FROM ghcr.io/astral-sh/uv:0.9-python3.13-bookworm-slim@sha256:7072fbb9cf84e6b76bee43905c27a1cf4afa48bfa49de3cb2b57f748ada6cc10
 
-# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends curl \
+ && rm -rf /var/lib/apt/lists/*
+ 
+RUN adduser --disabled-password --gecos "" --home /nonroot --uid 10001 appuser
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy dependency files first for better layer caching
 COPY pyproject.toml uv.lock ./
-
-# Install dependencies (production only, frozen lockfile)
 RUN uv sync --frozen --no-dev --no-install-project
 
-# Copy the application files
 COPY app ./app
 
-# Expose the port the app runs on
+RUN chown -R appuser:appuser /app
+USER appuser
+
 EXPOSE 8000
 
-# Define the command to run the application using Gunicorn via uv
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD curl -fsS "http://127.0.0.1:8000/health" || exit 1
+  
 CMD ["uv", "run", "--no-dev", "gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "app.app:app"]
