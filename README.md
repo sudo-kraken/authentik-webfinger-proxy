@@ -10,130 +10,67 @@ This is a minimal Flask application that implements a WebFinger endpoint for Tai
 - **WSGI Compatible:** Runs with Gunicorn for production-ready deployments.
 - **Containerised:** Easily deployable with Docker.
 
-## File Structure
+## Requirements
+- Python 3.13 with [uv](https://docs.astral.sh/uv/)
+- Docker optional
 
+## Quick start with uv
+```bash
+uv sync --all-extras
+export DOMAIN=auth.example-domain.com
+uv run flask --app app:app run --host 0.0.0.0 --port ${PORT:-8000}
+# or Gunicorn
+uv run --no-dev gunicorn -w ${WEB_CONCURRENCY:-2} -b 0.0.0.0:${PORT:-8000} app:app
+```
+
+## Docker
+```bash
+docker run --rm -e DOMAIN=auth.example-domain.com -p 8000:8000 ghcr.io/sudo-kraken/authentik-webfinger-proxy:latest
+
+# For compose use see the repo example
+```
+
+## Configuration
+
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| PORT | no | 8000 | Port to bind |
+| WEB_CONCURRENCY | no | 2 | Gunicorn workers |
+| DOMAIN | yes |  | Domain of your Authentik issuer host |
+| APPLICATION | no | tailscale | Authentik application slug |
+| CACHE_TTL | no | 300 | Cache IDP endpoints seconds |
+| REQUEST_TIMEOUT | no | 10 | HTTP timeout seconds |
+
+## Health and readiness
+- `GET /health` returns `{ "ok": true }`.
+
+## Endpoint
+- `GET /.well-known/webfinger?resource=acct:user@example.com`
+
+## Project layout
 ```
 authentik-webfinger-proxy/
-├── Dockerfile
-├── pyproject.toml
-├── uv.lock
-├── .python-version
-└── app/
-    └── app.py
+  app/
+  Dockerfile
+  pyproject.toml
+  tests/
 ```
 
-## Prerequisites
-
-- [Docker](https://www.docker.com/)
-- (Alternatively) [uv](https://docs.astral.sh/uv/) and Python 3.13 for local development
-
-## Setup and Installation
-
-### Using Docker
-
-1. **Set DOMAIN Environment Variable:**
-
-  The application uses the `DOMAIN` environment variable to configure the issuer URL. For example, if you want your issuer URL to be `https://auth.example-domain.com/application/o/tailscale/`, set:
-
-  ```bash
-export DOMAIN=auth.example-domain.com
-```
-
-1. **(Optional) Set APPLICATION Environment Variable:**
-
-  The application uses the `APPLICATION` environment variable to configure the application (slug) from Authentik. For example, if you want your application to be `tailscaleapp`, set:
-
-  ```bash
-export APPLICATION=tailscaleapp
-```
-
-By default, we use `tailscale` as the application name.
-
-3. **(Optional) Configure Caching and Timeout:**
-
-  Additional environment variables for performance tuning:
-
-  ```bash
-export CACHE_TTL=300        # Cache IDP endpoints for 5 minutes (default)
-export REQUEST_TIMEOUT=10   # HTTP request timeout in seconds (default)
-```
-
-2. **Build the Docker Image:**
-
-  Run the following command from the project root:
-
-  ```bash
-docker build -t authentik-webfinger-proxy .
-```
-
-3. **Run the Docker Container:**
-
-  Run the container while exposing port 8000 and passing the environment variable:
-
-  ```bash
-docker run -d -p 8000:8000 -e DOMAIN=auth.example-domain.com authentik-webfinger-proxy
-```
-
-## Using Local Development
-
-1. **Install uv:**
-
-   Follow the [official installation guide](https://docs.astral.sh/uv/getting-started/installation/), or:
-
-   ```bash
-   curl -LsSf https://astral.sh/uv/install.sh | sh
-   ```
-
-2. **Install Dependencies:**
-
-   ```bash
-   uv sync
-   ```
-
-3. **Set the Environment Variable:**
-
-   ```bash
-   export DOMAIN=auth.example-domain.com
-   ```
-
-4. **Run the Application:**
-
-   ```bash
-   uv run python app/app.py
-   ```
-
-   Or use Gunicorn:
-
-   ```bash
-   uv run gunicorn -w 4 -b 0.0.0.0:8000 app:app
-   ```
-
-## Endpoint Usage
-
-The application listens on the following endpoint:
-
-```
-GET /.well-known/webfinger
-```
-
-## Example Request
-
-To query the service, you can run:
-
+## Development
 ```bash
-curl "http://localhost:8000/.well-known/webfinger?resource=acct:user@example.com"
+uv run ruff check --fix .
+uv run ruff format .
+uv run pytest --cov
 ```
 
-## Running with Gunicorn
+## Licence
+See [LICENSE](LICENSE)
 
-The Dockerfile is configured to run the app using Gunicorn with 4 workers:
-
-```bash
-gunicorn -w 4 -b 0.0.0.0:8000 app:app
-```
-
-This provides a robust WSGI server suitable for production environments.
+## Security
+See [SECURITY.md](SECURITY.md)
 
 ## Contributing
+See [CONTRIBUTING.md](CONTRIBUTING.md)
 
-Feel free to open issues or submit pull requests if you have suggestions or improvements.
+## Support
+Open an [issue](/../../issues)
