@@ -9,12 +9,12 @@ _A minimal Flask service that implements `/.well-known/webfinger` to help Tailsc
 
 <div align="center">
 
-[![Docker](https://img.shields.io/github/v/tag/sudo-kraken//authentik-webfinger-proxy?label=docker&logo=docker&style=for-the-badge)](https://github.com/sudo-kraken//authentik-webfinger-proxy/pkgs/container//authentik-webfinger-proxy) [![Python](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fsudo-kraken%2F/authentik-webfinger-proxy%2Fmain%2Fpyproject.toml&logo=python&logoColor=yellow&color=3776AB&style=for-the-badge)](https://github.com/sudo-kraken//authentik-webfinger-proxy/blob/main/pyproject.toml)
+[![Docker](https://img.shields.io/github/v/tag/sudo-kraken/authentik-webfinger-proxy?label=docker&logo=docker&style=for-the-badge)](https://github.com/sudo-kraken//authentik-webfinger-proxy/pkgs/container//authentik-webfinger-proxy) [![Python](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fsudo-kraken%2F/authentik-webfinger-proxy%2Fmain%2Fpyproject.toml&logo=python&logoColor=yellow&color=3776AB&style=for-the-badge)](https://github.com/sudo-kraken/authentik-webfinger-proxy/blob/main/pyproject.toml)
 </div>
 
 <div align="center">
 
-[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/sudo-kraken//authentik-webfinger-proxy?label=openssf%20scorecard&style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/sudo-kraken//authentik-webfinger-proxy)
+[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/sudo-kraken/authentik-webfinger-proxy?label=openssf%20scorecard&style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/sudo-kraken/authentik-webfinger-proxy)
 
 </div>
 
