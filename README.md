@@ -1,6 +1,22 @@
-# Authentik WebFinger Proxy
+<div align="center">
+<img src="https://raw.githubusercontent.com/sudo-kraken/authentik-webfinger-proxy/main/docs/assets/logo.png" align="center" width="144px" height="144px"/>
 
-A minimal Flask service that implements `/.well-known/webfinger` to help Tailscale discover your Authentik OpenID Connect provider. Built with uv and designed for local or containerised runs.
+### Authentik Webfinger Proxy
+
+_A minimal Flask service that implements `/.well-known/webfinger` to help Tailscale discover your Authentik OpenID Connect provider. Built with uv and designed for local or containerised runs._
+
+</div>
+
+<div align="center">
+
+[![Docker](https://img.shields.io/github/v/tag/sudo-kraken/authentik-webfinger-proxy?label=docker&logo=docker&style=for-the-badge)](https://github.com/sudo-kraken/authentik-webfinger-proxy/pkgs/container/authentik-webfinger-proxy) [![Python](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fsudo-kraken%2Fauthentik-webfinger-proxy%2Fmain%2Fpyproject.toml&logo=python&logoColor=yellow&color=3776AB&style=for-the-badge)](https://github.com/sudo-kraken/authentik-webfinger-proxy/blob/main/pyproject.toml)
+</div>
+
+<div align="center">
+
+[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/sudo-kraken/authentik-webfinger-proxy?label=openssf%20scorecard&style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/sudo-kraken/authentik-webfinger-proxy)
+
+</div>
 
 ## Overview
 
