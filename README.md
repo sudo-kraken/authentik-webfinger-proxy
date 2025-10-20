@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://raw.githubusercontent.com/sudo-kraken//authentik-webfinger-proxy/main/docs/assets/logo.png" align="center" width="144px" height="144px"/>
+<img src="docs/assets/logo.png" align="center" width="144px" height="144px"/>
 
 ### Authentik Webfinger Proxy
 
@@ -17,6 +17,25 @@ _A minimal Flask service that implements `/.well-known/webfinger` to help Tailsc
 [![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/sudo-kraken/authentik-webfinger-proxy?label=openssf%20scorecard&style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/sudo-kraken/authentik-webfinger-proxy)
 
 </div>
+
+## Contents
+
+- [Overview](#overview)
+- [Architecture at a glance](#architecture-at-a-glance)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Quick start](#quick-start)
+- [Docker](#docker)
+- [Configuration](#configuration)
+- [Health](#health)
+- [Endpoint](#endpoint)
+- [Production notes](#production-notes)
+- [Development](#development)
+- [Troubleshooting](#troubleshooting)
+- [Licence](#licence)
+- [Security](#security)
+- [Contributing](#contributing)
+- [Support](#support)
 
 ## Overview
 
@@ -119,14 +138,18 @@ uv run pytest --cov
 - If you receive 404 responses, confirm the `resource` query is present and correctly formatted.
 
 ## Licence
-See [LICENSE](LICENSE)
+
+This project is licensed under the MIT Licence. See the [LICENCE](LICENCE) file for details.
 
 ## Security
-See [SECURITY.md](SECURITY.md)
+
+If you discover a security issue, please review and follow the guidance in [SECURITY.md](SECURITY.md) if present, or open a private security-focused issue with minimal details and request a secure contact channel.
 
 ## Contributing
+
 Feel free to open issues or submit pull requests if you have suggestions or improvements.
 See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Support
-Open an [issue](/../../issues)
+
+Open an [issue](/../../issues) with as much detail as possible, including your environment details and relevant logs or output.
