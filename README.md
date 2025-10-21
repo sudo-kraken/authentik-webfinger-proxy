@@ -59,7 +59,7 @@ The service responds to WebFinger queries by constructing an issuer URL from you
 
 ## Prerequisites
 
-- [Docker](https://www.docker.com/)
+- [Docker](https://www.docker.com/) / [Kubernetes](https://kubernetes.io/)
 - (Alternatively) [uv](https://docs.astral.sh/uv/) and Python 3.13 for local development
 
 ## Quick start
@@ -81,6 +81,15 @@ docker pull ghcr.io/sudo-kraken//authentik-webfinger-proxy:latest
 docker run --rm -p 8000:8000 \
   -e DOMAIN=auth.example-domain.com \
   ghcr.io/sudo-kraken//authentik-webfinger-proxy:latest
+```
+
+## Kubernetes (Helm)
+
+You can deploy the app on Kubernetes using the published Helm chart:
+
+```bash
+helm install authentik-webfinger-proxy oci://ghcr.io/sudo-kraken/helm-charts/authentik-webfinger-proxy \
+  --namespace authentik-webfinger-proxy --create-namespace
 ```
 
 ## Configuration
