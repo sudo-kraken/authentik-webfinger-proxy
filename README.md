@@ -9,7 +9,7 @@ _A minimal Flask service that implements `/.well-known/webfinger` to help Tailsc
 
 <div align="center">
 
-[![Docker](https://img.shields.io/github/v/tag/sudo-kraken/authentik-webfinger-proxy?label=docker&logo=docker&style=for-the-badge)](https://github.com/sudo-kraken//authentik-webfinger-proxy/pkgs/container//authentik-webfinger-proxy) [![Python](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fsudo-kraken%2F/authentik-webfinger-proxy%2Fmain%2Fpyproject.toml&logo=python&logoColor=yellow&color=3776AB&style=for-the-badge)](https://github.com/sudo-kraken/authentik-webfinger-proxy/blob/main/pyproject.toml)
+[![Docker](https://img.shields.io/github/v/tag/sudo-kraken/authentik-webfinger-proxy?label=docker&logo=docker&style=for-the-badge)](https://github.com/sudo-kraken//authentik-webfinger-proxy/pkgs/container//authentik-webfinger-proxy) [![Helm](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsudo-kraken%2Fhelm-charts%2Frefs%2Fheads%2Fmain%2Fcharts%2Fauthentik-webfinger-proxy%2FChart.yaml&query=%24.version&label=&logo=helm&style=for-the-badge&logoColor=0F1487&color=white)](https://github.com/sudo-kraken/helm-charts/tree/main/charts/authentik-webfinger-proxy) [![Python](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fsudo-kraken%2F/authentik-webfinger-proxy%2Fmain%2Fpyproject.toml&logo=python&logoColor=yellow&color=3776AB&style=for-the-badge)](https://github.com/sudo-kraken/authentik-webfinger-proxy/blob/main/pyproject.toml)
 </div>
 
 <div align="center">
