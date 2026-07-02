@@ -24,8 +24,18 @@ def validate_application_name(app_name):
     return app_name
 
 
+def validate_domain_name(domain_name):
+    """Validate host name without scheme, path, or port"""
+    if not re.match(r"^[a-zA-Z0-9.-]+$", domain_name):
+        raise ValueError(f"Invalid domain name: {domain_name}")
+    if ".." in domain_name or domain_name.startswith(".") or domain_name.endswith("."):
+        raise ValueError(f"Invalid domain name: {domain_name}")
+    return domain_name
+
+
 # Validate inputs
 try:
+    DOMAIN = validate_domain_name(DOMAIN)
     APPLICATION = validate_application_name(APPLICATION)
 except ValueError as e:
     app.logger.error(f"Configuration error: {e}")
