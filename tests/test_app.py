@@ -205,6 +205,26 @@ class TestInputValidation:
         with pytest.raises(ValueError, match="Invalid application name"):
             validate_application_name("app;with;semicolons")
 
+    def test_validate_domain_name_valid(self):
+        """Test domain name validation with valid input."""
+        from app.app import validate_domain_name
+
+        assert validate_domain_name("idp.example.com") == "idp.example.com"
+        assert validate_domain_name("login-1.example.co") == "login-1.example.co"
+
+    def test_validate_domain_name_invalid(self):
+        """Test domain name validation with invalid input."""
+        from app.app import validate_domain_name
+
+        with pytest.raises(ValueError, match="Invalid domain name"):
+            validate_domain_name("https://idp.example.com")
+
+        with pytest.raises(ValueError, match="Invalid domain name"):
+            validate_domain_name("idp.example.com/path")
+
+        with pytest.raises(ValueError, match="Invalid domain name"):
+            validate_domain_name("idp..example.com")
+
 
 class TestIDPEndpoints:
     """Tests for IDP endpoint fetching."""
